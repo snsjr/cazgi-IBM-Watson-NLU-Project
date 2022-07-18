@@ -39,19 +39,19 @@ class App extends React.Component {
   
   sendForSentimentAnalysis = () => {
     this.setState({sentiment:true});
-    let url = ".";
+    let url = "https://samuellevita-8080.theiadocker-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/";
     let mode = this.state.mode
     url = url+"/" + mode + "/sentiment?"+ mode + "="+document.getElementById("textinput").value;
-
+    console.log(url)
     fetch(url).then((response)=>{
         response.json().then((data)=>{
         this.setState({sentimentOutput:data.label});
         let output = data.label;
         let color = "white"
         switch(output) {
-          case "positive": color = "black";break;
-          case "negative": color = "black";break;
-          default: color = "black";
+          case "positive": color = "green";break;
+          case "negative": color = "yellow";break;
+          default: color = "red";
         }
         output = <div style={{color:color,fontSize:20}}>{output}</div>
         this.setState({sentimentOutput:output});
@@ -61,7 +61,7 @@ class App extends React.Component {
   sendForEmotionAnalysis = () => {
 
     this.setState({sentiment:false});
-    let url = ".";
+    let url = "https://samuellevita-8080.theiadocker-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/";
     let mode = this.state.mode
     url = url+"/" + mode + "/emotion?"+ mode + "="+document.getElementById("textinput").value;
 
